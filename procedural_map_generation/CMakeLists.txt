@@ -1,42 +1,23 @@
-cmake_minimum_required(VERSION 3.20)
-project(MazeProject)
+cmake_minimum_required(VERSION 3.15)
+project(MazeGenerator VERSION 1.0 LANGUAGES CXX)
 
-# Use C++17
-set(CMAKE_CXX_STANDARD 17)
+# Force C++20 standard
+set(CMAKE_CXX_STANDARD 20)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
-# Enable static linking for SFML (optional but makes repo more portable)
-add_definitions(-DSFML_STATIC)
-
-# Include directories
-include_directories(${CMAKE_SOURCE_DIR}/include)
-
-# Collect all source files
-file(GLOB_RECURSE SOURCES
-    "${CMAKE_SOURCE_DIR}/src/*.cpp"
-    "${CMAKE_SOURCE_DIR}/src/*.c"
-)
-
-# Add executable
-add_executable(Maze ${SOURCES})
-
-# Find SFML (works with vcpkg or manual installation if SFML_DIR is set)
+# 1. Find SFML (This works automatically on Linux if libsfml-dev is installed)
 find_package(SFML 2.6 COMPONENTS graphics window system REQUIRED)
 
-# Link SFML libraries (static version)
-target_link_libraries(Maze
-    sfml-graphics-s
-    sfml-window-s
-    sfml-system-s
-)
+# 2. Identify Source Files
+set(SOURCES main.cpp)
 
-# Add any additional required system libraries for static SFML
-if(MSVC)
-    target_link_libraries(Maze
-        winmm
-        gdi32
-        opengl32
-        freetype
-        jpeg
-    )
+# 3. Create the Executable
+add_executable(${PROJECT_NAME} ${SOURCES})
+
+# 4. Link SFML Libraries
+target_link_libraries(${PROJECT_NAME} PRIVATE sfml-graphics sfml-window sfml-system)
+
+# 5. Handle Windows-specific settings (doesn't hurt Linux/Mac)
+if(WIN32)
+    set_target_properties(${PROJECT_NAME} PROPERTIES WIN32_EXECUTABLE TRUE)
 endif()
