@@ -1,0 +1,13 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="18.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <CustomBuild Include="C:\Users\hemid\source\repos\procedural_map_generation\procedural_map_generation\build\CMakeFiles\fb03474ae08e409e46c63d18a9553508\generate.stamp.rule">
+      <Filter>CMake Rules</Filter>
+    </CustomBuild>
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="CMake Rules">
+      <UniqueIdentifier>{EBA82E60-7B12-3568-9439-0BF55A11E664}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>
