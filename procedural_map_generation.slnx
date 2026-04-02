@@ -1,7 +1,0 @@
-<Solution>
-  <Configurations>
-    <Platform Name="x64" />
-    <Platform Name="x86" />
-  </Configurations>
-  <Project Path="procedural_map_generation/procedural_map_generation.vcxproj" Id="92388058-a782-45c6-92d8-e50a090f1ec5" />
-</Solution>

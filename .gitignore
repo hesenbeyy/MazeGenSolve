@@ -55,6 +55,11 @@ nunit-*.xml
 [Rr]eleasePS/
 dlldata.c
 
+*.vcxproj
+*.vcxproj.filters
+*.slnx
+*.sln 
+
 # Benchmark Results
 BenchmarkDotNet.Artifacts/
 
