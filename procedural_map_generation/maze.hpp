@@ -6,6 +6,7 @@
 #include <queue>
 #include <climits>
 #include <algorithm>
+#include <chrono>
 #include "structs.hpp"
 #include "macros.hpp"
 #include "stack.hpp"
@@ -15,8 +16,8 @@ class Maze {
 private:
 	std::vector<Cell> grid;
 	Stack<int> stack;
-	int startIndex = -1;
-	int finishIndex = -1;
+	int startIndex = getIndex(0,0);
+	int finishIndex = getIndex(ROWS - 1,COLS - 1);
 
 public:
 	Maze() {
@@ -68,22 +69,22 @@ public:
 		if (c.path) {
 			sf::RectangleShape rect(sf::Vector2f(CELL_SIZE, CELL_SIZE));
 			rect.setPosition(float(x), float(y));
-			rect.setFillColor(sf::Color(227, 38, 54, 255));
+			rect.setFillColor(sf::Color(255,0,0,255));
 			window.draw(rect);
 		}
-		else if (c.visited_djikstra) {
+		/*else if (c.visited_djikstra) {
 			sf::RectangleShape rect(sf::Vector2f(CELL_SIZE, CELL_SIZE));
 			rect.setPosition(float(x), float(y));
 			rect.setFillColor(sf::Color(255, 165, 0, 150));
 			window.draw(rect);
-		}
+		}*/
 
-		else if (c.visited) {
+		/*else if (c.visited) {
 			sf::RectangleShape rect(sf::Vector2f(CELL_SIZE, CELL_SIZE));
 			rect.setPosition(float(x), float(y));
 			rect.setFillColor(sf::Color(100, 100, 100));
 			window.draw(rect);
-		}
+		}*/
 
 		if (c.walls[TOP]) {
 			sf::Vertex line[] = {
@@ -186,7 +187,6 @@ public:
 	}
 
 	inline void maze_generation(sf::RenderWindow& window) {
-
 		srand(static_cast<unsigned int>(time(NULL)));
 		int currentIndex{ 0 };
 		int neighbourIndex{ 0 };
@@ -205,13 +205,15 @@ public:
 				getCell(neighbourIndex).visited = true;
 				stack.push(neighbourIndex);
 				
+				
 			}
 			else {
 				stack.pop();
 			}
 
 			// COMMENT THIS PART IF YOU DESIRE MOMENTARY VISUALIZATION
-
+			 /* 
+			 
 			window.clear(sf::Color::Black);
 			drawGrid(window);
 
@@ -220,6 +222,9 @@ public:
 			}
 
 			window.display();
+			// sf::sleep(sf::seconds(1));
+
+			*/
 
 			// COMMENT THIS PART IF YOU DESIRE MOMENTARY VISUALIZATION
 		}
@@ -227,12 +232,12 @@ public:
 
 		// UNCOMMENT THIS PART IF YOU DESIRE MOMENTARY VISUALIZATION
 		
-		/* 
+		
 		window.clear(sf::Color::Black);
 		drawGrid(window);
-		drawCell(getCell(isCurrent ? currentIndex : neighbourIndex), window, sf::Color(255, 165, 0, 255));
+		drawCell(getCell(currentIndex), window, sf::Color(255, 165, 0, 255));
 		window.display(); 
-		*/
+		
 
 		// UNCOMMENT THIS PART IF YOU DESIRE MOMENTARY VISUALIZATION
 
@@ -301,10 +306,10 @@ public:
 			Cell& current = getCell(currentIndex);
 			if (current.visited_djikstra) continue;
 			current.visited_djikstra = true;
-			window.clear(sf::Color::Black);
-			drawGrid(window);
-			drawStartFinish(window);
-			window.display();
+			//window.clear(sf::Color::Black);
+			//drawGrid(window);
+			//drawStartFinish(window);
+			//window.display();
 
 			if (currentIndex == finishIndex) break;
 
@@ -320,9 +325,10 @@ public:
 		}
 
 		reconstructPath();
-		window.clear(sf::Color::Black);
-		drawGrid(window);
-		window.display();
+		//window.clear(sf::Color::Black);
+		//drawGrid(window);
+		//window.display();
+
 	}
 };
 

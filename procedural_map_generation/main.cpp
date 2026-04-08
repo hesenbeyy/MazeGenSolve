@@ -6,10 +6,10 @@
 int main() {
 
 	Maze maze;
-	sf::RenderWindow window(sf::VideoMode(800, 600), "Maze");
+	sf::RenderWindow window(sf::VideoMode(WIDTH, HEIGHT), "Maze");
 	sf::Vector2i mousePos;
-	bool isStartSelected = false;
-	bool isFinishSelected = false;
+	//bool isStartSelected = true;
+	//bool isFinishSelected = true;
 	bool isMazeCreated = false;
 	bool pathComputed = false;
 	bool solveMaze = false;
@@ -44,19 +44,36 @@ int main() {
 				}
 			}
 		}
-
+		/*
 		window.clear(sf::Color::Black);
 		maze.drawGrid(window);
 		maze.drawStartFinish(window);
 		window.display();
+		*/
+		if (!isMazeCreated) {
+			maze.maze_generation(window);
+			isMazeCreated = true;
+		}
+		
 
-		if (!isMazeCreated) maze.maze_generation(window);
-		isMazeCreated = true;
+		if (!pathComputed && solveMaze) {
+			auto start = std::chrono::high_resolution_clock::now();
 
-		if (isStartSelected && isFinishSelected && !pathComputed && solveMaze) {
 			maze.djikstra(window);
+
+			auto end = std::chrono::high_resolution_clock::now();
+
+			std::chrono::duration<double> elapsed = end - start;
+
+			std::cout << "Time: " << elapsed.count() << " seconds\n";
 			pathComputed = true;
 		}
+		window.clear(sf::Color::Black);
+		maze.drawGrid(window);
+		maze.drawStartFinish(window);
+		window.display();
 	}
+	
+
 	return 0;
 }

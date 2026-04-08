@@ -16,6 +16,8 @@ struct Cell {
 	int row;
 	int col;
 
+	// DFS Part
+
 	bool visited = false;
 	bool walls[4] = { true, true, true, true };
 
