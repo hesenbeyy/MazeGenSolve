@@ -35,7 +35,7 @@ int main() {
 
 					maze.setStart(row, col);
 					maze.setFinish(row, col);
-				}
+				
 			}
 		}
 		/*
