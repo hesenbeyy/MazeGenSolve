@@ -23,6 +23,12 @@ int main() {
 			if (event.type == sf::Event::KeyPressed) {
 				if (event.key.code == sf::Keyboard::Escape) window.close();
 				if (event.key.code == sf::Keyboard::S) solveMaze = true;
+				if (event.key.code == sf::Keyboard::R) {
+					isMazeCreated = false;
+					pathComputed = false;
+					solveMaze = false;
+					maze = Maze();
+				}
 			}
 
 			if (isMazeCreated && event.type == sf::Event::MouseButtonPressed) {
