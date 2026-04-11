@@ -8,8 +8,7 @@ int main() {
 	Maze maze;
 	sf::RenderWindow window(sf::VideoMode(WIDTH, HEIGHT), "Maze");
 	sf::Vector2i mousePos;
-	//bool isStartSelected = true;
-	//bool isFinishSelected = true;
+
 	bool isMazeCreated = false;
 	bool pathComputed = false;
 	bool solveMaze = false;
@@ -34,13 +33,8 @@ int main() {
 
 				if (!maze.isValid(row, col)) continue;
 
-				if (!isStartSelected) {
 					maze.setStart(row, col);
-					isStartSelected = true;
-				}
-				else if (!isFinishSelected) {
 					maze.setFinish(row, col);
-					isFinishSelected = true;
 				}
 			}
 		}
